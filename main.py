@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import base64
+from pprint import pprint
+
 import requests
 import time
 from cryptography.hazmat.primitives.serialization import load_pem_private_key
@@ -34,6 +36,8 @@ params['timestamp'] = timestamp
 payload = '&'.join([f'{param}={value}' for param, value in params.items()])
 signature = base64.b64encode(private_key.sign(payload.encode('ASCII')))
 params['signature'] = signature
+
+pprint(params)
 
 # Send the request
 headers = {
